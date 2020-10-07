@@ -1,17 +1,14 @@
 import { Coffee } from "./Coffee";
 import { IMilk } from "./IMilk";
-export class Cortado extends Coffee implements IMilk {
-    
-    MlMilk(): number {
-        return 25;
-    }
 
+export class Latte extends Coffee implements IMilk {
     Price(): number {
-        return 25;
+        return 40;
     }
-    
+    MlMilk(): number {
+        return 120;
+    }
     Strength() : string {
         return "Weak";
     }
-
 }
