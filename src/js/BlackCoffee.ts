@@ -2,6 +2,9 @@ import { Coffee } from "./Coffee";
 import { IMilk } from "./IMilk";
 
 export class BlackCoffee extends Coffee implements IMilk {
+    CoffeeDrink(): string {
+        return "Black Coffee";
+    }
     Price(): number {
         return 20 - this.discount;
     }
