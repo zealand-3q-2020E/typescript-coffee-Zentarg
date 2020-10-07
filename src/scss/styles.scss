@@ -47,9 +47,8 @@ h1{
 
 .OrderedListItem {
     list-style: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 180px 80px 80px 80px 40px;
     padding: 5px;
 }
 

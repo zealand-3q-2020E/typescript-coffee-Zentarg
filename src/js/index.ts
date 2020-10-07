@@ -20,6 +20,7 @@ function LogCoffeeObjects(obj : Coffee[]) {
 }
 
 let CoffeeList : HTMLUListElement = <HTMLUListElement> document.getElementById("CoffeeList");
+let OrderedList : HTMLUListElement = <HTMLUListElement> document.getElementById("OrderedList");
 CoffeeList.appendChild(CreateCoffeeListItem(new Cortado(0)));
 CoffeeList.appendChild(CreateCoffeeListItem(new Latte(0)));
 CoffeeList.appendChild(CreateCoffeeListItem(new BlackCoffee));
@@ -31,9 +32,10 @@ CoffeeList.appendChild(CreateCoffeeListItem(new Latte(0)));
 CoffeeList.appendChild(CreateCoffeeListItem(new BlackCoffee));
 
 function CreateCoffeeListItem(obj : Coffee) {
-
+    let id = addedCoffees;
     let li : HTMLLIElement = document.createElement("li");
     li.setAttribute("class", "CoffeeListItem");
+    li.classList.add(`CoffeeListID${addedCoffees.toString()}`);
     let name : HTMLDivElement = document.createElement("div");
     name.innerText = obj.CoffeeDrink();
     li.appendChild(name);
@@ -53,7 +55,7 @@ function CreateCoffeeListItem(obj : Coffee) {
     li.appendChild(mlMilk);
     let order : HTMLDivElement = document.createElement("div");
     order.addEventListener("click", () => {
-        OrderCoffee(this);
+        OrderCoffee(`CoffeeListID${id}`);
     });
     order.innerText = "Order";
     li.appendChild(order);
@@ -71,6 +73,31 @@ function isIMilk(arg : Coffee | IMilk): arg is IMilk {
     return (arg as IMilk).MlMilk !== undefined;
 }
 
-function OrderCoffee(e : HTMLElement) {
-    console.log("order");
+let nextOrderId = 0;
+
+function OrderCoffee(className : string) {
+    console.log(className);
+    let coffeeElement : HTMLLIElement = <HTMLLIElement> CoffeeList.querySelector(`.${className}`);
+    let newID : number = nextOrderId;
+    let children = OrderedList.childNodes;
+
+    let newElement = coffeeElement.cloneNode(true);
+    
+    let el : HTMLLIElement = <HTMLLIElement> OrderedList.appendChild(newElement);
+    el.lastElementChild.innerHTML = "Delete";
+    el.classList.remove(className);
+    el.classList.add(`OrderedListID${newID}`);
+    el.lastElementChild.addEventListener("click", () => {
+        RemoveOrder(`OrderedListID${newID}`);
+    });
+    if (newID % 2 == 0) {
+        el.setAttribute("style", "background-color: #3b3b3b; color: white;");
+    } else {
+        el.removeAttribute("style");
+    }
+    nextOrderId++;
+}
+
+function RemoveOrder(className : string) {
+    document.getElementsByClassName(className)[0].remove();
 }
