@@ -13,3 +13,46 @@ h2
 h1{
     @extend h2;
 }
+
+#CoffeeList {
+    max-width: 600px;
+    border: 1px solid #3b3b3b;
+    padding: 0;
+}
+
+.CoffeeListItem {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 180px 80px 80px 80px 40px;
+    padding: 5px;
+}
+
+.CoffeeListItem div {
+    text-align: left;
+}
+
+.CoffeeListItem div:last-child {
+    cursor: pointer;
+}
+
+.CoffeeListItem:first-child {
+    background: white;
+}
+
+#OrderedList {
+    max-width: 600px;
+    border: 1px solid #3b3b3b;
+    padding: 0;
+}
+
+.OrderedListItem {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+.OrderedListItem:first-child {
+    background: white;
+}
